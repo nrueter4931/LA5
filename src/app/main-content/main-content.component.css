@@ -19,3 +19,7 @@
 .add-button {
     font-size: bold;
 }
+
+.pull-right {
+    float:right;
+}
