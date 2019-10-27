@@ -5,6 +5,7 @@ interface IStudent {
   firstName: string;
   lastName: string;
   course: string;
+  editMode: boolean;
 }
 
 @Component({
@@ -15,6 +16,7 @@ interface IStudent {
 export class MainContentComponent implements OnInit {
 
     studentArray: Array<IStudent> = [];
+    disableAddButton = false;
     constructor() {}
 
   ngOnInit() {
@@ -23,32 +25,42 @@ export class MainContentComponent implements OnInit {
         id: 1,
         firstName: 'Nick',
         lastName: 'Rueter',
-        course: 'Programming'
+        course: 'Programming',
+        editMode: false
       },
       {
         id: 2,
         firstName: 'Mike',
         lastName: 'Tyson',
-        course: 'Boxing'
+        course: 'Boxing',
+        editMode: false
       },
       {
         id: 3,
         firstName: 'Mohammid',
         lastName: 'Ali',
-        course: 'Super Boxing'
+        course: 'Super Boxing',
+        editMode: false
       }
     ]
   }
   addStudent() {
     this.studentArray.unshift({
-      id: 1,
-      firstName: 'Nick',
-      lastName: 'Rueter',
-      course: 'Programming'
+      id: null,
+      firstName: null,
+      lastName: null,
+      course: null,
+      editMode: true
     });
+    this.disableAddButton = true;
   }
   removeStudent(index: number) {
     console.log('index', index);
     this.studentArray.splice(index, 1);
+  }
+
+  saveStudent() {
+    this.studentArray[0].editMode = false;
+    this.disableAddButton = false;
   }
 }
